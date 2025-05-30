@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #121212;
+    color: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+    padding: 20px;
+  }
+  
+  .clock {
+    background: #1d2126;
+    font-size: 80px;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    grid-column: 1 / 2;
+  }
+  
+  .clock::before {
+    content: "⏰ ";
+    font-size: 50px;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  .weather, .calendar, .stocks, .slideshow, .notes, .spotify{
+    background: #1d2126;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .weather {
+    grid-column: 1 / 2;
+  }
+  
+  .forecast {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .calendar {
+    align-self: start;
+  }
+  
+  .stocks {
+    grid-column: 2 / 3;
+  }
+  
+  .slideshow {
+    grid-column: 3 / 4;
+    grid-row: 1 / 3;
+  }
+  
+  .notes {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+  }
+  
+  .spotify {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+  }
+  
+  img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .notes textarea {
+    width: 100%;
+    height: 150px;
+    background: #121212;
+    color: white;
+    border: none;
+    resize: none;
+  }
+  

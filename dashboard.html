@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="dashboard_styles.css">
+  <script src="calendar.js"></script>
+</head>
+<body>
+  <div class="clock" id="clock"></div>
+
+  <div class="weather" id="weather">
+    <div>Carregando clima...</div>
+  </div>
+
+  <div class="calendar">
+    <div class="calendar-header">
+      <button onclick="changeMonth(-1)">&#8592;</button>
+      <h3 id="calendar-month-title">📅 Calendário</h3>
+      <button onclick="changeMonth(1)">&#8594;</button>
+    </div>
+    <div id="calendar-body"></div>
+  </div>
+
+  <div class="stocks">
+    <h3>Map of stocks/ETFs</h3>
+    <iframe src="https://finviz.com/map.ashx" width="100%" height="300" style="border: none;"></iframe>
+  </div>
+
+  <div class="slideshow" id="slideshow">
+    <h2>Slideshow fotos</h2>
+    <img id="slideshow-img" src="" alt="Slideshow">
+  </div>
+
+  <div class="notes">
+    <h2>Notas</h2>
+    <textarea></textarea>
+  </div>
+
+  <div class="spotify">
+    <h2>Spotify Controller</h2>
+    <p>Integração com API do Spotify</p>
+  </div>
+
+  <script>
+    // Relógio
+    setInterval(() => {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }, 1000);
+
+//Calendário
+function generateCalendar(containerId) {
+    const container = document.getElementById(containerId);
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDayIndex = new Date(year, month, 1).getDay();
+
+    const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const calendarGrid = document.createElement('div');
+    calendarGrid.style.display = 'grid';
+    calendarGrid.style.gridTemplateColumns = 'repeat(7, 1fr)';
+    calendarGrid.style.gap = '5px';
+
+    weekDays.forEach(day => {
+      const cell = document.createElement('div');
+      cell.textContent = day;
+      cell.style.fontWeight = 'bold';
+      calendarGrid.appendChild(cell);
+    });
+
+    for (let i = 0; i < firstDayIndex; i++) {
+      const empty = document.createElement('div');
+      calendarGrid.appendChild(empty);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dayCell = document.createElement('div');
+      dayCell.textContent = d;
+      dayCell.style.textAlign = 'center';
+      dayCell.style.padding = '5px';
+      dayCell.style.borderRadius = '5px';
+      if (d === today.getDate()) {
+        dayCell.style.background = '#ffffff20';
+      }
+      calendarGrid.appendChild(dayCell);
+    }
+
+    container.appendChild(calendarGrid);
+  }
+
+  generateCalendar("calendar-body");
+
+
+    // Clima - Substitua com sua API KEY da OpenWeatherMap
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=Lisboa&units=metric&appid=SUA_API_KEY')
+      .then(response => response.json())
+      .then(data => {
+        const weatherDiv = document.getElementById('weather');
+        weatherDiv.innerHTML = `
+          <div>${data.weather[0].description}</div>
+          <div>${data.main.temp}°C</div>
+          <div>${data.name}</div>
+        `;
+      });
+
+    // Slideshow - precisa apontar para URLs de uma pasta pública (ex: Google Drive public folder links)
+    const images = [
+      'https://images.medi.de/400x0/EN/medi-corporate/pictures/image-pictures/miscellaneous/woman-yoga-beach-m-73702.jpeg',
+      'https://images.medi.de/400x0/EN/medi-corporate/pictures/image-pictures/doctor-/-hospital-general/staff-office-m-42226.jpeg',
+      'https://images.medi.de/943x0/Storage/Images/Homepage/trend_colours_2024/mv-550-lilac-russet-red-sage-green-light-blue-FE-nature-stripes-wild-IM-07665-16to9.jpeg'
+    ];
+    let currentImage = 0;
+    function updateSlideshow() {
+      document.getElementById('slideshow-img').src = images[currentImage];
+      currentImage = (currentImage + 1) % images.length;
+    }
+    setInterval(updateSlideshow, 5000);
+    updateSlideshow();
+
+    
+  </script>
+</body>
+</html>
