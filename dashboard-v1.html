@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Dashboard</title>
+  <!-- Tailwind and modern CSS removed for compatibility -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Basic fallback styles for old Safari */
+    body { font-family: Arial, sans-serif; background: #f0f0f0; margin: 0; }
+    .bento { display: block; width: 100%; max-width: 900px; margin: 0 auto; }
+    .box { background: #fff; border: 1px solid #ccc; border-radius: 8px; margin: 10px 0; padding: 16px; }
+    h2 { font-size: 20px; margin-bottom: 8px; }
+    #clock { font-size: 32px; margin-top: 8px; }
+    #calendar { font-size: 14px; }
+    #weatherContent { margin-top: 8px; }
+    #slideshow { margin-top: 8px; max-width: 100%; }
+    .note-area { width: 100%; height: 60px; }
+  </style>
+</head>
+<body>
+  <div class="bento">
+    <div class="box" id="timeBox">
+      <h2>Time</h2>
+      <div id="clock"></div>
+    </div>
+    <div class="box" id="calendarBox">
+      <h2>Calendar</h2>
+      <div id="calendar"></div>
+    </div>
+    <div class="box" id="weatherBox">
+      <h2>Weather</h2>
+      <div id="weatherContent">Loading...</div>
+    </div>
+    <div class="box" id="slideshowBox">
+      <h2>Photo Slideshow</h2>
+      <img id="slideshow" src="" alt="slideshow" />
+    </div>
+    <div class="box" id="notesBox">
+      <h2>Notes</h2>
+      <textarea class="note-area" placeholder="Write your notes here..."></textarea>
+    </div>
+    <!-- Spotify embed removed for compatibility -->
+    <div class="box" id="spotifyBox">
+      <h2>Spotify</h2>
+      <p>Spotify embed not supported on iPad 1 Safari.</p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
